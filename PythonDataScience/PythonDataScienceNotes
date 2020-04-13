@@ -1,0 +1,88 @@
+1.  	NumPy
+		Pandas
+		SciPy
+		
+Pearson default correlation method in python
+
+Corelation - linear dependency between variables
+	-1 to 1, 1 indicate positive correlation
+	0 they are not lineraly dependent.
+	
+	heatmap (another way for correlation) different view than numbers
+	goal: try to different colors,
+			identifying similar consumers in a group and its essential for segmenetation.
+	for visulation , 
+		we need pyplot module from matplotlib
+		seaborn as sns
+		
+		sns.set() , nice skin for matplotlib
+		
+		steps:
+			plt.figure(flagsize=(12,9)) //12 inc x 9 wide
+			s = sns.heatmap(
+				correlation matrix, 
+				annot=true,
+				cmap='autumn'(colors), 
+				vmin=-1,
+				vmax=1)boundaries
+			//x and y labels
+			s.set_yticklables(s.get_yticklabels(),roation =0, fontsize = 12)
+			s.set_xticklables(s.get_xticklabels(),roation =90, fontsize = 12)			
+			plt.title('Corelation heatmap')
+			plt.show()
+	
+	Visualize data using scatter plot (age against income)
+		steps:
+			plt.figure(flagsize = (12,9))
+			plt.scatter(df_segmentation.iloc[:,2],df_segmentation.iloc[:,3])
+			plt.xlable('Age')
+			plt.ylabel('Income')
+			plt.title('Visualitation of raw data')
+			
+Concluded initial data exploration
+
+Standardization:
+	Now , pre processing.(statistical pre processing) , standaradization of data
+	(similarites and differences between datas)
+	values falls in the same range [-a, a]
+					ex, age difference 70 max and 20 = 50
+						income ddifferennce 100000 to 150000 = 50000 
+								(look weightage will be given to 50000 it might ignore age itself)
+						therefore we need to treat each data as same.
+	
+	library to use : 
+		sklearn.preprocessing import StandardScaler
+		scaler = StandardScaler()
+		segmentation_std=scaler.flt_transform(df_segmentation)//data
+		
+Segmentation Models:
+	Clustering :
+		Background: individula observation (similar observeration in group)
+				developed by anthropologist, (human evolution) later on used by feds, psychcologist
+		Goal: Similarities in the same group , difference between 2 diff groups
+		2 types:	
+			Hierarchial, Flat 
+			
+		Hierarchial: Taxanomy animal kingdom (Hierarchy of clusters)
+			2 types: Divisive (Top Down) Continue as if each observation is in its own clusters
+					Aglomorative(Botton up)
+					Both should lead same result. 
+						(Aglomorative should be easy to implement in maths)
+			Ward method 
+				For segmentation prblem such as dividing group of people in 2 different groups
+					need to see the distance between the different groups 
+				calculate squre of distance between clusters
+		lib to use:
+		scipy.cluster.hierarchy import dendogram, linkage
+		
+		dendogram: tree like hierarchial representation of points (nice visual, 
+					nice tool to asses a hierarchcial clustering)
+		linkage:	specific clustering method we employ
+		
+		linkage(standars data, method='ward')
+			linkage = linkage(segmentation_Std, method='ward')
+			//to visual linkage use dendogram visual library
+			
+			
+			
+		
